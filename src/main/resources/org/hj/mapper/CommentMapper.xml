@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="org.hj.mapper.CommentMapper">
+
+	<!-- 테이블에 게시글을 등록하는 sql문 -->
+	<insert id="commentUpload" parameterType="org.hj.model.CommentVO">
+		insert into
+		comment(comment,writer,bno)
+		values(#{comment}, #{writer},#{bno})
+	</insert>
+	
+	<!-- 해당 게시글의 댓글을 뿌려주는 SQL문 -->
+
+	<select id="showComments" resultType="org.hj.model.CommentVO">
+		select * from comment where bno = #{bno}
+	</select>
+	
+	
+	
+
+	
+
+</mapper>

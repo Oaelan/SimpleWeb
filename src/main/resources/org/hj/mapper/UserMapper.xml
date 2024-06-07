@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="org.hj.mapper.UserMapper">
+
+	<!-- sql 인터페이스에 있는 추상메서드와 id값이 같아야 해당 메서드 실행 -->
+
+	<!-- 웹브라우저에서 DB로 값을 전달할 때 -->
+	<insert id="insertUser" parameterType="org.hj.model.UserInfo">
+		INSERT INTO user (id, password,name,gender,homenum,phonecall,email)
+		VALUES (#{id}, #{password},#{name},
+		#{gender},#{homenum}, #{phonecall}, #{email})
+	</insert>
+
+
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="org.hj.mapper.PostMapper">
+
+	<!-- 테이블에 등록된 게시글들을 뿌리는 sql문 -->
+	<!-- sql 인터페이스에 있는 추상메서드와 id값이 같아야 해당 메서드 실행 -->
+	<select id="showPosts" resultType="org.hj.model.PostInfo">
+		select * from post
+	</select>
+
+	<!-- 테이블에 게시글을 등록하는 sql문 -->
+	<insert id="posting" parameterType="org.hj.model.PostInfo">
+		insert into
+		post(title,writer,content)
+		values(#{title}, #{writer}, #{content})
+	</insert>
+
+	<!-- 게시글의 상세내용을 보여주는 sql문 -->
+	<select id="showDetail" resultType="org.hj.model.PostInfo">
+		select
+		bno,title,writer,content,updatedate from post
+		where bno = #{bno}
+	</select>
+
+	<!-- 게시글 삭제 -->
+	<delete id="deletePost" parameterType="org.hj.model.PostInfo">
+		DELETE FROM post
+		WHERE bno
+		= #{bno}
+	</delete>
+
+	<update id="resetCount" parameterType="org.hj.model.PostInfo">
+		 SET @count = 0;
+	</update> 
+
+ 	<update id="resetBno" parameterType="org.hj.model.PostInfo">
+        UPDATE post SET bno = @count := @count + 1;
+	</update>
+	
+	
+
+	<!-- 수정할 게시글 가져오기 -->
+	<select id="getEditPost" resultType="org.hj.model.PostInfo">
+		select * from post
+		where bno
+		= #{bno}
+	</select>
+
+	<!-- 게시글 수정 -->
+	<update id="updatePost" parameterType="org.hj.model.PostInfo">
+		update post set
+		title=#{title},content=#{content}
+		where bno = #{bno}
+	</update>
+
+
+</mapper>
